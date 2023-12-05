@@ -40,122 +40,135 @@ public class MyMath {
         return area;
     }
 
-    public static int digitos(int numero) {
-        System.out.println(" Introduce un numero ");
-        int contador = 0;
-
-
-        if (numero == 0) {
-            return 1;
+    public static boolean esPrimo(int num2) {
+        if (num2 <= 1) {
+            return false;
         }
-        while (numero != 0) {
-            numero = numero / 10;
-            contador++;
+        for (int i = 2; i <= Math.sqrt(num2); i++) {
+            if (num2 % i == 0) {
+                return false;
 
+            }
         }
-        System.out.println("esta es la cantidad de digitos :");
-        return contador;
+        return true;
 
     }
-
-    public static int digitosPares(int numero) {
-        System.out.println(" Introduce un numero ");
+public static int contarDigitosPares(int num) {
         int contador = 0;
 
-
-        if (numero == 0) {
-            return 0;
-        }
-        while (numero != 0) {
-            int digito = numero % 10;
+        // Se recorre cada dígito del número
+        while (num != 0) {
+            int digito = num % 10; // Se obtiene el último dígito
             if (digito % 2 == 0) {
-                contador++;
+                contador++; // Se incrementa el contador si el dígito es par
             }
-
-            numero = numero / 10;
-
+            num /= 10; // Se elimina el último dígito para continuar con el siguiente
         }
-        System.out.println("esta es la cantidad de digitos pares:");
-        return contador;
 
+        return contador;
+    }
+    public static boolean noEsPrimo(int num3) {
+        if (num3 <= 1) {
+            return false; // 0 y 1 no son primos
+        }
+
+        for (int i = 2; i <= Math.sqrt(num3); i++) {
+            if (num3 % i == 0) {
+                return false; // Si tiene un divisor diferente de 1 y sí mismo, no es primo
+            }
+        }
+
+        return true; // Si no tiene divisores diferentes de 1 y sí mismo, es primo
     }
 
-
-    public static int digitosImpares(int numero) {
-        System.out.println(" Introduce un numero ");
+    public static int contarNumerosPares(int num) {
         int contador = 0;
 
-
-        if (numero == 0) {
-            return 0;
-        }
-        while (numero != 0) {
-            int digito = numero % 10;
-            if (digito % 2 == 1) {
-                contador++;
+        // Se recorre cada dígito del número
+        while (num != 0) {
+            int digito = num % 10; // Se obtiene el último dígito
+            if (digito % 2 == 0) {
+                contador++; // Se incrementa el contador si el dígito es par
             }
-
-            numero = numero / 10;
-
+            num /= 10; // Se elimina el último dígito para continuar con el siguiente
         }
-        System.out.println("esta es la cantidad de digitos impares:");
-        return contador;
 
+        return contador;
     }
 
-    public static int factorial(int numero) {
-        int num = 0;
-        if (numero < 0) {
-            System.out.println("El factorial no está definido para números negativos.");
-            return -1; // Valor indicativo de error
+    public static int contardorDigitosimPares(int num) {
+        int contador = 0;
+
+        // Se recorre cada dígito del número
+        while (num != 0) {
+            int digito = num % 10; // Se obtiene el último dígito
+            if (digito % 2 != 0) {
+                contador++; // Se incrementa el contador si el dígito es impar
+            }
+            num /= 10; // Se elimina el último dígito para continuar con el siguiente
+        }
+
+        return contador;
+    }
+
+    public static int calcularFactorial(int num) {
+        if (num < 0) {
+            throw new IllegalArgumentException("El factorial no está definido para números negativos");
+        }
+
+        // El factorial de 0 es 1 por definición
+        if (num == 0) {
+            return 1;
         }
 
         int resultado = 1;
-
-        for (int i = 2; i <= numero; i++) {
-            resultado *= i;
+        for (int i = 1; i <= num; i++) {
+            resultado *= i; // Multiplicar el resultado por cada número desde 1 hasta el número dado
         }
 
         return resultado;
+
+
     }
 
-    public static int factorialRecursivo(int numero) {
-        int num = 0;
-
-        if (numero < 0) {
-            System.out.println("El factorial no está definido para números negativos.");
-            return -1; // Valor indicativo de error
+    public static long calcularFactorialRecursivo(int num) {
+        if (num < 0) {
+            throw new IllegalArgumentException("El factorial no está definido para números negativos");
         }
-        if (numero == 0 || numero == 1) {
+
+        // Caso base: el factorial de 0 es 1 por definición
+        if (num == 0) {
             return 1;
-        } else {
-            return numero * factorialRecursivo(numero - 1);
         }
+
+        // Caso recursivo: n! = n * (n-1)!
+        return num * calcularFactorialRecursivo(num - 1);
     }
 
-    public static int ecuacionSegundoG(int a,int b,int c){
+   public static int calcularNumeroSoluciones(double a, double b, double c) {
+        double discriminante = b * b - 4 * a * c;
 
-        int soluciones = ecuacionSegundoG(a, b, c);
-        System.out.println("La ecuación tiene " + soluciones + " soluciones.");
-
-        int discriminante=b*b-4*a*c;
         if (discriminante > 0) {
-            return 2;
-        }  else if (discriminante==0){
-            return 1;
-        } else{
-            return 0;
+            return 2; // Dos soluciones reales distintas
+        } else if (discriminante == 0) {
+            return 1; // Una solución real (raíz doble)
+        } else {
+            return 0; // No hay soluciones reales
         }
     }
 
-    public static int sumaDigitos(int numero){
-        numero=Math.abs(numero);
-    int suma=0;
-    while (numero>0){
-        suma+=numero%10;
-        numero/=10;
-    }
-    return suma;
+
+    public static int sumarDigitos(int num) {
+        int suma = 0;
+
+        // Se recorre cada dígito del número
+        while (num != 0) {
+            int digito = num % 10; // Se obtiene el último dígito
+            suma += digito; // Se suma el dígito al resultado
+            num /= 10; // Se elimina el último dígito para continuar con el siguiente
+        }
+
+        return suma;
     }
 
 
@@ -164,5 +177,9 @@ public class MyMath {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         System.out.println();
+
+        }
+
     }
-}
+
+
